@@ -1,0 +1,59 @@
+
+<app-nav-bar aria-label="Navigation bar"></app-nav-bar>
+<div id="car-search-form">
+  <form class="car-search-form" [formGroup]="carSearchForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label for="PICK-UP">PICK-UP LOCATION</label>
+          <input matInput type="text" formControlName="pickUpLocation" name="PICK-UP">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label>PICK-UP DATE</label>
+          <input matInput type="text" [min]="minDate" [max]="maxDate" [matDatepicker]="pickUpDatePicker" formControlName="pickUpDate" diabled="true">
+          <mat-datepicker-toggle matSuffix [for]="pickUpDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #pickUpDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <label>DROP-OFF DATE</label>
+          <input matInput type="text" [min]="minDate" [max]="maxDate" [matDatepicker]="dropOffDatePicker" formControlName="dropOffDate" diabled="true">
+          <mat-datepicker-toggle matSuffix [for]="dropOffDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #dropOffDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label>PICK-UP TIME</label>
+          <input matInput type="time" formControlName="pickUpTime" diabled="true">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <label>DROP-OFF TIME</label>
+          <input matInput type="time" formControlName="dropOffTime" diabled="true">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label>AGE OF DRIVER</label>
+          <mat-select formControlName="ageOfDriver">
+            <ng-container *ngFor="let age of ageList">
+              <mat-option  [value]="age">{{age}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <button id="submitBtn" aria-label="Car-search submit button" type="submit" [disabled]="carSearchForm.invalid">Search Rental Cars</button>
+  </form>
+</div>

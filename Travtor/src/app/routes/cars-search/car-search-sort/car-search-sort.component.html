@@ -1,0 +1,6 @@
+<mat-radio-group class="sort-radio-group"
+  aria-labelledby="radio-group-label">
+  <mat-radio-button class="sort-radio-button" *ngFor="let sort of sortOption" [value]="sort" (change)="radioChange($event,sort)">
+    {{sort}}
+  </mat-radio-button>
+</mat-radio-group>

@@ -1,0 +1,57 @@
+<div class="car-search-detail">
+  <div class="row">
+    <h3>{{carSearchDetails?.pickUpLocation}}</h3>
+  </div>
+  <div class="row">
+    <label>{{carSearchInfo}}</label>
+  </div>
+</div>
+<div id="car-result-page">
+  <ng-container *ngFor="let car of carList?.CarItineraries">
+    <mat-card>
+      <div class="row">
+        <div class="col image" *ngIf="car.vehicle.image">
+          <img src="{{car.vehicle.image}}" alt="image">
+        </div>
+        <div class="col car-detail">
+          <mat-card-title>{{car.vehicle.type}}</mat-card-title>
+          <mat-card-subtitle><b>{{car.vehicle.name}}</b></mat-card-subtitle>
+          <div class="row">
+            <mat-icon aria-hidden="false" aria-label="family_restroom icon">family_restroom</mat-icon>
+            <p>{{car.vehicle.specifications.passengerCapacity}}</p>
+            <mat-icon aria-hidden="false" aria-label="work outlinee icon">work_outline</mat-icon>
+            <p>{{car.vehicle.specifications.baggageCapacity}}</p>
+            <ng-container *ngIf="car.unlimitedMileage">
+              <mat-icon aria-hidden="false" aria-label="gas meter icon">gas_meter</mat-icon>
+              <p>Unlimited miles</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-content *ngIf="car.cancellationDetails.isCancellationFree">
+        <div class="row">
+          <p class="free-cancellation">Free cancellation </p>
+          <p>until {{getDateString(car.cancellationDetails.freeCancellationEndDate)}}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-content *ngIf="car.cancellationDetails.isCancellationFree === false">
+        <p>Cancellation fees may apply</p>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-content>
+        <div class="row">
+          <p class="free-cancellation">{{car.fare.perDay | currency:carList.currency}}</p>
+          <p>avg/day</p>
+        </div>
+        <div class="row">
+          <p>Total (23 days): <b>{{car.fare.totalAmount | currency:carList.currency:'symbol':'.0-0'}}</b></p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+  <div class="sort row" aria-label="Sort or Filter Button" routerLink="/car/sort" routerLinkActive="activebutton">
+    <div class="col sort-lbl">Sort</div>
+    <div class="col filter-lbl">Filter</div>
+  </div>
+</div>
